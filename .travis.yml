@@ -3,7 +3,8 @@ services:
 script:
 - docker build -t wtanaka/fedora-22-systemd .
 # Check that systemctl runs
-- docker run wtanaka/fedora-22-systemd systemctl
+# --tmpfs /tmp --tmpfs /run
+- docker run -v /sys/fs/cgroup:/sys/fs/cgroup wtanaka/fedora-22-systemd systemctl
 after_success:
 - >
   curl -H "Content-Type: application/json"
